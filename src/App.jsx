@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Link, Switch, Redirect } from "react-router-dom";
 import Home from "./Home";
 import Create from "./Create";
 import Gallery from "./Gallery";
@@ -15,16 +15,23 @@ function App() {
           <div style={linkStyle}>🎨 Create</div>
         </Link>
         <Link to="/gallery">
-          <div style={linkStyle}>🖼️ Gallery</div>
+          <div style={linkStyle}>🖼️ My Gallery</div>
         </Link>
       </nav>
       <hr />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/create">
+            <Create />
+          </Route>
+          <Route exact path="/gallery">
+            <Gallery />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
       </main>
     </>
   );
